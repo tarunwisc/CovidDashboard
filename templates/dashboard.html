@@ -1,0 +1,20 @@
+{% load static %}
+{% static "images" as baseUrl %}
+
+{% block content %}
+
+<h1>dashboard page</h1>
+
+
+    {% for register in registers %}
+
+        <!-- <div>
+            dashboard3
+            <img src="{% static "images/test.jpg" %}" alt="static">
+            <a href="#">{{register.username}}</a>
+            <img src="{{register.image.url}}" alt="upload">
+        </div> -->
+
+    {% endfor %}
+
+{% endblock %}

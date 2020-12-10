@@ -1,0 +1,8 @@
+{
+  "short_name": "Coca-Corona",
+  "name": "Coca-Corona: COVID dashboard (and more!) for college students.",
+  "start_url": "./",
+  "display": "standalone",
+  "theme_color": "#000000",
+  "background_color": "#ffffff"
+}
