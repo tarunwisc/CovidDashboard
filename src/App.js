@@ -2,7 +2,6 @@ import React from "react";
 import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
 import Image from "react-bootstrap/Image";
-import {Map, InfoWindow, Marker, GoogleApiWrapper} from 'google-maps-react';
 
 import RegisterScreen from "./RegisterScreen.js";
 import LoginScreen from "./LoginScreen.js";
@@ -89,7 +88,7 @@ class App extends React.Component {
 
   renderFooter() {
     return (
-      <Navbar bg="light" className="d-flex justify-content-around">
+      <Navbar sticky="bottom" bg="light" className="d-flex justify-content-around">
         <Nav className="d-flex justify-content-around">
           <Nav.Link
             href="#dashboard"

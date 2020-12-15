@@ -1,5 +1,6 @@
 import React from "react";
 import Table from "react-bootstrap/Table";
+import { ChartProvider, LineSeries, XAxis, YAxis } from 'rough-charts';
 
 import "./App.css";
 
@@ -75,61 +76,60 @@ class Dashboard extends React.Component {
 
   renderStateData() {
     return (
-      <Table responsive bordered hover>
-        <thead>
-          <th>Date</th>
-          <th>Positive Cases</th>
-          <th>Deaths</th>
-          <th>Recovered Total</th>
-        </thead>
-        <tbody>
-          {this.state.dailyStateValues.map((day, idx) => {
-            if (idx > 7) return;
-            return (
-              <tr key={day.date}>
-                <td>{day.date}</td>
-                <td>{day.positiveIncrease}</td>
-                <td>{day.deathIncrease}</td>
-                <td>{day.recovered}</td>
-              </tr>
-            );
-          })}
-        </tbody>
-      </Table>
+      <div>
+        <h4 className='text-center'>Covid Cases Graph For Past Week</h4>
+        <ChartProvider data={this.state.dailyStateValues.slice(0,7).reverse()} height={300} id="state" kind="ChartProvider" margin={{right:100}} name="State Cases">
+          <YAxis dataKey="positiveIncrease"/>
+          <XAxis dataKey="date"/>
+          <LineSeries dataKey="positiveIncrease"/>
+        </ChartProvider>
+        <Table responsive bordered hover>
+          <thead>
+            <th>Date</th>
+            <th>Positive Cases</th>
+            <th>Deaths</th>
+            <th>Recovered Total</th>
+          </thead>
+          <tbody>
+            {this.state.dailyStateValues.map((day, idx) => {
+              if (idx > 7) return;
+              return (
+                <tr key={day.date}>
+                  <td>{day.date}</td>
+                  <td>{day.positiveIncrease}</td>
+                  <td>{day.deathIncrease}</td>
+                  <td>{day.recovered}</td>
+                </tr>
+              );
+            })}
+          </tbody>
+        </Table>
+      </div>
     );
   }
   render() {
     return (
       <>
-        <h2>Current U.S. values</h2>
+        <h2 className='text-center'>Current U.S. values</h2>
         <Table responsive bordered hover>
           <tbody>
             <tr>
-              <td rowSpan="2">Positive</td>
-              <td>Total</td>
-              <td>{this.state.currentUSValues.positive}</td>
+              <th>Positive Cases:</th>
+              <td>Total - {this.state.currentUSValues.positive}</td>
+              <td>Increase - {this.state.currentUSValues.positiveIncrease}</td>
             </tr>
             <tr>
-              <td>Increase</td>
-              <td>{this.state.currentUSValues.positiveIncrease}</td>
+              <th>Deaths:</th>
+              <td>Total - {this.state.currentUSValues.death}</td>
+              <td>Increase - {this.state.currentUSValues.deathIncrease}</td>
             </tr>
             <tr>
-              <td rowSpan="2">Death</td>
-              <td>Total</td>
-              <td>{this.state.currentUSValues.death}</td>
-            </tr>
-            <tr>
-              <td>Increase</td>
-              <td>{this.state.currentUSValues.deathIncrease}</td>
-            </tr>
-            <tr>
-              <td>Recovered</td>
-              <td>Total</td>
-              <td>{this.state.currentUSValues.recovered}</td>
+              <th>Recovered:</th>
+              <td>Total - {this.state.currentUSValues.recovered}</td>
             </tr>
           </tbody>
         </Table>
-        <h2>{this.state.stateUS} values in the past week</h2>
+        <h2 className='text-center'>{this.state.stateUS} values in the past week</h2>
         <p>{this.state.ready ? "" : "loading"}</p>
         {this.state.ready ? this.renderStateData() : ""}
       </>

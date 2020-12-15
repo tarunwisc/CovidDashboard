@@ -159,7 +159,7 @@ export class ManuBarMap extends Component {
     return (
       <Map
         google={this.props.google}
-        zoom={16}
+        zoom={7}
         style={mapStyles}
         initialCenter={userLocation}>
           <Marker onClick={this.onMarkerClick} name={'Current location'} />
